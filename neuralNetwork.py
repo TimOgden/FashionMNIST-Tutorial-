@@ -65,17 +65,18 @@ def plot_image(i, predictions_array, true_label, img):
 	else:
 		color = 'red'
 	
-	plt.xlabel("{} {:2.0f} {}".format(class_names[predicted_label], 100*np.max(predictions_array), class_names[true_label], color=color))
+	plt.xlabel("{} {:2.0f}% {}".format(class_names[predicted_label], 100*np.max(predictions_array), class_names[true_label], color=color))
 	
 def plot_value_array(i, predictions_array, true_label):
 	predictions_array, true_label = predictions_array[i], true_label[i]
 	plt.grid(False)
 	plt.xticks([])
 	plt.yticks([])
-	
-	thisplot = plt.pie(predictions_array, labels=class_names)
+
 	predicted_label = np.argmax(predictions_array)
-	
+	colors = ['gray', 'gray', 'gray', 'gray', 'gray', 'gray', 'gray', 'gray', 'gray', 'gray']
+	colors[predicted_label] = 'green'
+	thisplot = plt.pie(predictions_array, colors=colors)
 	#thisplot[predicted_label].set_color('red') Getting a tuple index error here, so just gonna skip the color part of it
 	#thisplot[true_label].set_color('blue')
 

@@ -80,11 +80,23 @@ def plot_value_array(i, predictions_array, true_label):
 	#thisplot[true_label].set_color('blue')
 
 predictions = model.predict(test_images)
+#Displaying one prediction
+#i = 0
+#plt.figure(figsize=(6,3))
+#plt.subplot(1,2,1)
+#plot_image(i, predictions, test_labels, test_images)
+#plt.subplot(1,2,2)
+#plot_value_array(i, predictions, test_labels)
+#plt.show()
 
-i = 0
-plt.figure(figsize=(6,3))
-plt.subplot(1,2,1)
-plot_image(i, predictions, test_labels, test_images)
-plt.subplot(1,2,2)
-plot_value_array(i, predictions, test_labels)
-plt.show()
+#Displaying several predictions
+num_rows = 5
+num_cols = 5
+num_images = 5*5
+plt.figure(figsize=(2*2*num_cols, num_rows))
+for i in range(num_images):
+	plt.subplot(num_rows, 2*num_cols, 2*i+1)
+	plot_image(i, predictions, test_labels, test_images)
+	plt.subplot(num_rows, 2*num_cols, 2*i+2)
+	plot_value_array(i, predictions, test_labels)
+plt.show() #The pie graphs make the format really ugly, but whatever, we can work on that

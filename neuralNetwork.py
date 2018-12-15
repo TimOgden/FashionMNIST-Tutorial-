@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow import keras
-
+from keras.models import load_model
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -39,12 +39,14 @@ model = keras.Sequential([
 	keras.layers.Dense(10, activation=tf.nn.softmax) #10 nodes because 10 possible outcomes and activation type softmax choses the highest value of all nodes in layer
 ])
 #Takes an optimizer, loss function, and metrics to measure
-model.compile(optimizer=tf.train.AdamOptimizer(),
+model.compile(optimizer=keras.optimizers.Adam(), 
 				loss='sparse_categorical_crossentropy', #Not sure what this means or how they got it
 				metrics=['accuracy'])
 
 #Time to train the model on the training data
-model.fit(train_images, train_labels, epochs=5)
+model.fit(train_images, train_labels, epochs=5, shuffle=True)
+
+model.save('fashion_mnist.h5') #Save the model for later use
 
 #Now time to test the model on the test data that we have
 test_loss, test_acc = model.evaluate(test_images, test_labels)
@@ -100,4 +102,4 @@ for i in range(num_images):
 	plot_image(i, predictions, test_labels, test_images)
 	plt.subplot(num_rows, 2*num_cols, 2*i+2)
 	plot_value_array(i, predictions, test_labels)
-plt.show() #The pie graphs make the format really ugly, but whatever, we can work on that
+plt.show()

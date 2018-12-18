@@ -44,7 +44,7 @@ model.compile(optimizer=keras.optimizers.Adam(),
 				metrics=['accuracy'])
 
 #Time to train the model on the training data
-model.fit(train_images, train_labels, epochs=5, shuffle=True)
+model.fit(train_images, train_labels, verbose=1, epochs=5, shuffle=True)
 
 model.save('fashion_mnist.h5') #Save the model for later use
 
@@ -79,8 +79,8 @@ def plot_value_array(i, predictions_array, true_label):
 	colors = ['gray', 'gray', 'gray', 'gray', 'gray', 'gray', 'gray', 'gray', 'gray', 'gray']
 	colors[predicted_label] = 'green'
 	thisplot = plt.pie(predictions_array, colors=colors)
-	#thisplot[predicted_label].set_color('red') Getting a tuple index error here, so just gonna skip the color part of it
-	#thisplot[true_label].set_color('blue')
+	#thisplot['predicted_label'].set_color('red') #Getting a tuple index error here, so just gonna skip the color part of it
+	#thisplot['true_label'].set_color('blue')
 
 predictions = model.predict(test_images)
 #Displaying one prediction
